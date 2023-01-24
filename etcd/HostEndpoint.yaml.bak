@@ -1,0 +1,20 @@
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: etcd-ep-master
+  labels:
+    role: master
+spec:
+  node: vm1
+  expectedIPs:
+  - 192.168.56.101
+  ports:
+  - name: etcd-port
+    port: 2379
+    protocol: TCP
+  - name: etcd-peer-port
+    port: 2380
+    protocol: TCP
+  - name: nginx-port
+    port: 80
+    protocol: TCP

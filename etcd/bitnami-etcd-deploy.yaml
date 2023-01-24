@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bitnami-etcd
+  name: bitnami-etcd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitnami-etcd
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: bitnami-etcd
+    spec:
+      hostNetwork: true
+      containers:
+      - image: bitnami/etcd:3.4.22
+        name: etcd
+        resources: {}
+        volumeMounts:
+        - mountPath: /netpol
+          name: netpol
+        env:
+        - name: ALLOW_NONE_AUTHENTICATION
+          value: "yes"
+      volumes:
+      - name: netpol
+        hostPath:
+          # directory location on host
+          path: /home/user/work/netpol
+          # this field is optional
+          type: Directory
+status: {}

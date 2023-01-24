@@ -1,0 +1,13 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: etcd-apiserver
+  namespace: kube-system
+spec:
+  selector: component == 'etcd'
+  types:
+  - Ingress
+  ingress:
+  - action: Allow
+    source:
+      selector: component == 'kube-apiserver'
