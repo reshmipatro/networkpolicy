@@ -1,0 +1,10 @@
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: master-ep
+  labels:
+    role: master
+spec:
+  node: ubuntu22
+  expectedIPs:
+  - 192.168.56.110
