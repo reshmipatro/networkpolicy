@@ -7,7 +7,6 @@ items:
       argocd.argoproj.io/sync-wave: "1"
     generation: 1
     name: default
-    resourceVersion: "618"
   spec:
     bpfLogLevel: ""
     floatingIPs: Disabled
