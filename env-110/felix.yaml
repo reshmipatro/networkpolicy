@@ -8,7 +8,6 @@ items:
     generation: 1
     name: default
     resourceVersion: "618"
-    uid: 10897b2d-3241-47d6-aa61-71a549416d3b
   spec:
     bpfLogLevel: ""
     floatingIPs: Disabled
