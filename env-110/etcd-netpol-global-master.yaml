@@ -1,0 +1,37 @@
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: etcd-access-master
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  selector: "role == 'master'" # Should match the HostEndpoint labels
+  order: 0
+  ingress:
+  - action: Allow # Allows only API server to contact etcd (but failsafe has higher priority), so this rule does not work unless failsafe is changed
+    protocol: TCP
+    source:
+      selector: has(role)
+      ports: [6443]
+    destination:
+      ports: [2379, 2380]
+  - action: Allow # Enables incoming ping on HostEndpoint
+    protocol: ICMP
+  - action: Allow # Needed to contact self kubelet from other nodes (e.g. kubectl exec)
+    protocol: TCP
+    destination:
+      ports: [10250]
+  - action: Allow # Test NGINX App with hostNetwork=true
+    protocol: TCP
+    source:
+      #selector: has(role)
+      ports: [54321, 54322]
+    destination:
+      ports: [80]
+  egress:
+  - action: Allow # Needed to contact kubelet of other nodes (e.g. kubectl exec)
+    protocol: TCP
+    destination:
+      nets:
+      - "192.168.56.0/24"
+      ports: [10250]
