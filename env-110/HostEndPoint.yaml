@@ -2,6 +2,8 @@ apiVersion: crd.projectcalico.org/v1
 kind: HostEndpoint
 metadata:
   name: master-ep
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"  
   labels:
     role: master
 spec:
