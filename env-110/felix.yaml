@@ -3,10 +3,9 @@ items:
 - apiVersion: crd.projectcalico.org/v1
   kind: FelixConfiguration
   metadata:
+    name: default
     annotations:
       argocd.argoproj.io/sync-wave: "1"
-    generation: 1
-    name: default
   spec:
     bpfLogLevel: ""
     floatingIPs: Disabled
