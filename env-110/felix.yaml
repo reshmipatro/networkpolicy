@@ -1,0 +1,38 @@
+apiVersion: v1
+items:
+- apiVersion: crd.projectcalico.org/v1
+  kind: FelixConfiguration
+  metadata:
+    annotations:
+      argocd.argoproj.io/sync-wave: "1"
+    generation: 1
+    name: default
+    resourceVersion: "618"
+    uid: 10897b2d-3241-47d6-aa61-71a549416d3b
+  spec:
+    bpfLogLevel: ""
+    floatingIPs: Disabled
+    logSeverityScreen: Info
+    reportingInterval: 0s
+
+    #failsafeInboundHostPorts: [tcp:22, udp:68, tcp:179, tcp:2379, tcp:2380, tcp:6443, tcp:6666, tcp:6667]  # Defaults
+    #failsafeOutboundHostPorts: [tcp:179, tcp:2379, tcp:2380, tcp:6443, tcp:6666, tcp:6667, udp:53, udp:67] # Defaults
+
+    # Removed etcd ports from failsafe
+    failsafeInboundHostPorts:
+      - protocol: tcp
+        port: 22
+      - protocol: udp
+        port: 68
+      - protocol: tcp
+        port: 179
+      - protocol: tcp
+        port: 6443
+      - protocol: tcp
+        port: 6666
+      - protocol: tcp
+        port: 6667
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
